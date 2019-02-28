@@ -5,8 +5,10 @@ module.exports = {
 
         //require modules here so mongodb is initialized before loading them
         const users = require('./users');
-        const clients = require('./clients');
         const admin_users = require('./admin-users');
+        const audio = require('./audio');
+        const video = require('./videos');
+        const stories = require('./stories');
 
         /**
          * 
@@ -64,6 +66,18 @@ module.exports = {
 
         app.post('/debug/decode-token', (req, res) => {
             users.decodeToken(res, req.body.token);
+        });
+
+        app.post('/audio/fetch-audios', (req, res) => {
+            audio.listAudio(res);
+        });
+
+        app.post('/video/fetch-videos', (req, res) => {
+            video.listVideos(res);
+        });
+
+        app.post('/stories/fetch-stories', (req, res) => {
+            stories.listStories(res);
         });
     }
 }

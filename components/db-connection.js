@@ -28,16 +28,14 @@ class db {
         if(this.client){
             return {
                 admin_users: this.client.collection('admin_users'),
-                clients: this.client.collection('clients'),
                 users: this.client.collection('users'),
-                properties: this.client.collection('properties'),
-                slips: this.client.collection('slips'),
-                documents: this.client.collection('documents'),
-                transactions: this.client.collection('transactions'),
-                hotels: this.client.collection('hotels'),
+                videos: this.client.collection('videos'),
+                locations: this.client.collection('locations'),
+                ar: this.client.collection('ar'),
+                stories: this.client.collection('stories'),
+                audio: this.client.collection('audio'),
                 errors: this.client.collection('errors'),
                 user_events: this.client.collection('user_events'),
-                bookings: this.client.collection('bookings'),
             }
         }
     }
