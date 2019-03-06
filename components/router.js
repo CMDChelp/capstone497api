@@ -79,5 +79,9 @@ module.exports = {
         app.post('/stories/fetch-stories', (req, res) => {
             stories.listStories(res);
         });
+
+        app.post('/ar/fetch-ar', (req, res) => {
+            res.send([]);
+        });
     }
 }
