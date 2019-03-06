@@ -33,7 +33,7 @@ class Audio {
             },
         ];
 
-        res.send(dummyStories);
+        res.send(dummyAudio);
     }
 }
 
