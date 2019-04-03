@@ -104,14 +104,13 @@ class Users {
      * 
      * @desc inserts new user into the database
      */
-    signUp(res, email, password, phone, first_name, last_name, street_address, street_address2, postal_code, city, municipality, country, timezone, isAdmin){
-        
+    async signUp(res, email, password, first_name, last_name, isAdmin){
+        console.log(email, password, first_name, last_name, isAdmin);
+
         //all fields required - if some fields are not required, remove param from this check
-        if(!email || !password || !phone || !first_name || !last_name || !street_address || !postal_code || !city || !municipality || !country || !timezone) {
+        if(!email || !password || !first_name || !last_name) {
             return res.sendStatus(400);
         }
-
-        console.log(email, password, phone, first_name, last_name, street_address, street_address2, postal_code, city, municipality, country, timezone);
 
         if(!this.verifyEmail(email)) {
             return res.send({status: "bad email"});
@@ -121,75 +120,54 @@ class Users {
             return res.send({status: "bad password"});
         }
 
-        users.findOne({email: email}).then(user => {
+        try {
+            let user = await users.findOne({email: email});
+
             if(user){
                 return res.send({status: "taken"});
             }
 
-            bcrypt.genSalt(10, (err, salt) => {
+            let hash = await bcrypt.hash(password, 10);
+
+            console.log(hash);
+            let random = Random(20, true);
+
+            users.insertOne({
+                email: email,
+                password: hash,
+                profile: {
+                    first_name: first_name,
+                    last_name: last_name
+                },
+                verification_code: random,
+                verified: 0,
+                enabled: 1,
+                force_password_refresh: false,
+                created: new Date(),
+                modified: new Date(),
+                type: isAdmin ? USER_TYPES.CLIENT : USER_TYPES.CUSTOMER
+            }, (err, inserted) => {
                 if(err){
+                    console.error(err);
                     return res.sendStatus(500);
                 }
-                bcrypt.hash(password, salt, (err, hash) => {
-                    if(err){
-                        //log error
-                        console.error(err);
-                        res.sendStatus(500);
-                    } else {
-                        //text msg random num
-                        let random = Random(32);
-    
-                        users.insertOne({
-                            email: email,
-                            password: hash,
-                            profile: {
-                                phone: phone,
-                                first_name: first_name,
-                                last_name: last_name,
-                                street_address: street_address,
-                                street_address2: street_address2,
-                                postal_code: postal_code,
-                                city: city,
-                                municipality: municipality,
-                                country: country,
-                                timezone: timezone,
-                            },
-                            verification_code: random,
-                            verified: 0,
-                            enabled: 1,
-                            force_password_refresh: false,
-                            created: new Date(),
-                            modified: new Date(),
-                            type: isAdmin ? USER_TYPES.CLIENT : USER_TYPES.CUSTOMER
-                        }, (err, inserted) => {
-                            if(err){
-                                console.error(err);
-                                return res.sendStatus(500);
-                            }
 
-                            //TODO: send text
-                            let user = createToken({
-                                email: email,
-                                profile: {
-                                    phone: phone,
-                                    first_name: first_name,
-                                    last_name: last_name,
-                                    street_address: street_address,
-                                    postal_code: postal_code,
-                                    city: city,
-                                    municipality: municipality,
-                                    country: country,
-                                    timezone: timezone,
-                                },
-                                _id: inserted.insertedId
-                            });
-
-                            res.send({token: user});
-                        });
-                    }
+                //TODO: send text
+                let user = createToken({
+                    email: email,
+                    profile: {
+                        first_name: first_name,
+                        last_name: last_name,
+                    },
+                    _id: inserted.insertedId
                 });
+
+                res.send({token: user});
             });
-        });
+        } catch(e) {
+            console.error(e);
+            res.sendStatus(500);
+        }
     }
 
     /**
@@ -199,22 +177,22 @@ class Users {
      * 
      * @desc Passes token from front-end to retrieve a new token, used for resuming sessions or refreshing user data on profile change
      */
-    refreshUser(res, token) {
+    async refreshUser(res, token) {
         let user = verifyToken(token);
         if(!user) return res.sendStatus(400);
 
-        users.findOne({_id: ObjectId(user._id)}).then(result => {
+        try {
+            let result = await users.findOne({_id: ObjectId(user._id)});
             if(result) {
                 delete result.password;
                 res.send(createToken(result));
             } else {
-                console.error(__error, "user not found");
-                res.sendStatus(500);
+                res.status(400).send({error: "No user"})
             }
-        }).catch(e => {
+        } catch(e) {
             console.error(__error, e);
-            res.sendStatus(500);
-        });
+            res.sendStatus(500);     
+        }
     }
 
     /**

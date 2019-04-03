@@ -24,7 +24,8 @@ module.exports = {
         });
 
         app.post('/users/sign-up', (req, res) => {
-            users.signUp(res, req.body.email, req.body.password, req.body.phone, req.body.first_name, req.body.last_name, req.body.address, req.body.address2, req.body.postal_code, req.body.city, req.body.municipality, req.body.country, req.body.timezone);
+            console.log(req.body);
+            users.signUp(res, req.body.email, req.body.password,  req.body.first_name, req.body.last_name, req.body.address, req.body.address2, req.body.postal_code, req.body.city, req.body.municipality, req.body.country, req.body.timezone);
         });
 
         app.post('/users/sign-in', (req, res) => {
