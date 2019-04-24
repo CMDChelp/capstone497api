@@ -9,7 +9,7 @@ require('./utils/error-logger');
 
 //load files from either /build or /public folders
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'build')));
+// app.use(express.static(path.join(__dirname, 'build')));
 
 app.use(bodyParser.urlencoded({
     extended: true

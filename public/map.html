@@ -2,56 +2,62 @@
 <html>
 
 <head>
-	<script src='https://static-assets.mapbox.com/gl-pricing/dist/mapbox-gl.js'></script>
-	<link href='https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src='https://static-assets.mapbox.com/gl-pricing/dist/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
-	<div id='map' style='position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px;'></div>
-	<script>
-		mapboxgl.accessToken = 'pk.eyJ1IjoiY2FyZC1iIiwiYSI6ImNqdG45bmVvYjA4Ymc0YW1xenR5YjE4dDgifQ.BSraC2WHncupQX8aWt_2dA';
-		let bounds = new mapboxgl.LngLatBounds([-122.68101379537353, 45.61673251292356], [-122.66463567033702, 45.63848011716303]);
-		
-		const map = new mapboxgl.Map({
-			container: 'map',
-			style: 'mapbox://styles/card-b/cju1tmxi71ojf1fo0ongxvlqq',
-			center: [-122.671605, 45.627714],
-			zoom: 16,
-			pitch: 40,
-			bearing: -25,
-			minZoom: 10,
-			maxBounds: bounds
-		});
+    <div id='map' style='position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px;'></div>
+    <script>
+        try {
+            mapboxgl.accessToken = 'pk.eyJ1IjoiY2FyZC1iIiwiYSI6ImNqdG45bmVvYjA4Ymc0YW1xenR5YjE4dDgifQ.BSraC2WHncupQX8aWt_2dA';
+            let bounds = new mapboxgl.LngLatBounds([-122.68101379537353, 45.61673251292356], [-122.66463567033702, 45.63848011716303]);
 
-		let moving = false;
+            const map = new mapboxgl.Map({
+                container: 'map',
+                style: 'mapbox://styles/card-b/cju1tmxi71ojf1fo0ongxvlqq',
+                center: [-122.671605, 45.627714],
+                zoom: 16,
+                pitch: 40,
+                bearing: -25,
+                minZoom: 10,
+                maxBounds: bounds
+            });
 
-		map.on('moveend', () => {
-			moving = false;
-		});
+            let moving = false;
 
-		map.on('touchend', (e) => {
-			window.postMessage(JSON.stringify(map.getCenter()));
-		});
+            map.on('moveend', () => {
+                moving = false;
+            });
 
-		document.addEventListener('message', function (data) {
-			let { command, lat, long, bounds } = JSON.parse(data.data);
+            map.on('touchend', (e) => {
+                window.postMessage(JSON.stringify(map.getCenter()));
+            });
 
-			try {
-				if(command === "move") {
-					if(!moving) {
-						map.jumpTo({ center: [long, lat], zoom: 15, bearing: -25,  });
-					}
-				}
+            document.addEventListener('message', function (data) {
+                let { command, lat, long, bounds } = JSON.parse(data.data);
 
-				if(command === "bounds") {
-					window.postMessage(JSON.stringify(map.getBounds()))
-				}
-			} catch (e) {
-				console.log(e);
-			}
-		});
+                try {
+                    if (command === "move") {
+                        if (!moving) {
+                            map.jumpTo({ center: [long, lat], zoom: 15, bearing: -25, });
+                        }
+                    }
 
-	</script>
+                    if (command === "bounds") {
+                        window.postMessage(JSON.stringify(map.getBounds()))
+                    }
+                } catch (e) {
+                    console.log(e);
+                }
+            });
+        } catch (e) {
+            alert(JSON.stringify(e));
+        }
+
+
+    </script>
 </body>
+
 </html>
