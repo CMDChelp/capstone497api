@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<script src='https://static-assets.mapbox.com/gl-pricing/dist/mapbox-gl.js'></script>
+	<link href='https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+	<div id='map' style='position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px;'></div>
+	<script>
+		mapboxgl.accessToken = 'pk.eyJ1IjoiY2FyZC1iIiwiYSI6ImNqdG45bmVvYjA4Ymc0YW1xenR5YjE4dDgifQ.BSraC2WHncupQX8aWt_2dA';
+		let bounds = new mapboxgl.LngLatBounds([-122.68101379537353, 45.61673251292356], [-122.66463567033702, 45.63848011716303]);
+		
+		const map = new mapboxgl.Map({
+			container: 'map',
+			style: 'mapbox://styles/card-b/cju1tmxi71ojf1fo0ongxvlqq',
+			center: [-122.671605, 45.627714],
+			zoom: 16,
+			pitch: 40,
+			bearing: -25,
+			minZoom: 10,
+			maxBounds: bounds
+		});
+
+		let moving = false;
+
+		map.on('moveend', () => {
+			moving = false;
+		});
+
+		map.on('touchend', (e) => {
+			window.postMessage(JSON.stringify(map.getCenter()));
+		});
+
+		document.addEventListener('message', function (data) {
+			let { command, lat, long, bounds } = JSON.parse(data.data);
+
+			try {
+				if(command === "move") {
+					if(!moving) {
+						map.jumpTo({ center: [long, lat], zoom: 15, bearing: -25,  });
+					}
+				}
+
+				if(command === "bounds") {
+					window.postMessage(JSON.stringify(map.getBounds()))
+				}
+			} catch (e) {
+				console.log(e);
+			}
+		});
+
+	</script>
+</body>
+</html>
