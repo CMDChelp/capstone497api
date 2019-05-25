@@ -19,7 +19,8 @@ module.exports = {
          * 
          */
         app.get('/', function (req, res) {
-            res.sendFile(path.join(__dirname, 'build', 'index.html'));
+            //there isn't really a route here, so just confim the connnection
+            res.send("api.historicroutes.org");
         });
 
         // app.post('/users/check-email', (req, res) => {
