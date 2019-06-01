@@ -183,7 +183,22 @@ The Elks Club was home to many distinguished and charitable members of the commu
 
 Though no longer in this building, the Vancouver Elks 823 continue to perform charitable work in Vancouver. Their current activities include raising funds for Washington Elks Children’s Therapy Program, the donation of 225 food boxes yearly for families, and over $10,000 in support for over 500 Clark County veterans, still holding true to the four tenets of the national organization founded in the wake of the Civil War.`,
 		year: "1911",
-		content: [{ type: "audio", linkToVideo: true, thumbnail: getAudioImage('elks'), location: getAudioLocation('elks') }, { type: "video", title: "Saved by the Pin", thumbnail: cdn + "/videos/elks-thumbnail.jpg", location: cdn + "/videos/elks-video.mp4" }],
+		content: [{ 
+			type: "audio", 
+			linkToVideo: true, 
+			thumbnail: getAudioImage('elks'), 
+			location: getAudioLocation('elks') 
+		}, { 
+			type: "video", 
+			title: "Saved by the Pin", 
+			thumbnail: cdn + "/videos/elks-thumbnail.jpg", 
+			location: cdn + "/videos/elks-video.mp4" 
+		}, {
+			type: "video", 
+			title: "Elks Animation", 
+			thumbnail: cdn + "/videos/elks2-thumbnail.jpg", 
+			location: cdn + "/videos/elks2-video.mp4" 
+		}],
 		backgroundImage: `${cdn}${backgroundImages}elks.png`,
 		headerImage: getHeader('elks'),
 		splashVideo: getVideo('elks')
@@ -235,6 +250,13 @@ Today the park is home to a multitude of events that celebrate the community and
 				location: cdn + "/esther.mp3",
 				thumbnail:
 					cdn + "/images/esther/historic/1.jpg"
+			},
+			{
+				type: "video",
+				title: "The Legend of Esther Short",
+				location: cdn + "/videos/esther-video.mp4",
+				thumbnail:
+					cdn + "/videos/esther-thumbnail.jpg"
 			}
 		],
 		backgroundImage: `${cdn}${backgroundImages}esther.png`,
@@ -279,7 +301,7 @@ It was placed on the National Register of Historic Places in 1979. After sitting
 				location:
 					cdn + "/videos/evergreen-video.mp4",
 				thumbnail:
-					cdn + "/videos/evergreen-thumbnail.jpg"
+					cdn + "/videos/evergreen-thumbnail2.jpg"
 			}
 		],
 		backgroundImage: `${cdn}${backgroundImages}evergreen.png`,
@@ -472,7 +494,7 @@ In 1969, Robert Hidden, the great-grandson of Hidden Brick Company founder Lowel
 
 As a result, the building was not lost and eventually was purchased by a local heritage group, The Historic Trust. It has worked to reconnect many of the alumnae of The Academy to this important space. Today, within its halls, interpretative displays communicate to a new generation the faith and feats of a group of sisters that arrived in this place in 1856.`,
 		year: "1873",
-		content: [{ type: "audio", linkToVideo: true, thumbnail: getAudioImage('providence'), location: getAudioLocation('providence')  }, { type: "video", location: cdn + "/videos/providence-video.mp4", thumbnail: cdn + "/videos/providence-thumbnail.jpg", title: "Begging Tours" }],
+		content: [{ type: "audio", linkToVideo: true, thumbnail: getAudioImage('providence'), location: getAudioLocation('providence')  }, { type: "video", location: cdn + "/videos/providence-video.mp4", thumbnail: cdn + "/videos/providence-thumbnail2.jpg", title: "Begging Tours" }],
 		backgroundImage: `${cdn}${backgroundImages}providence.png`,
 		headerImage: getHeader('providence'),
 		splashVideo: getVideo('providence')
