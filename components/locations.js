@@ -1,4 +1,4 @@
-const cdn = "https://s3-us-west-2.amazonaws.com/cmdc-cchm";
+const cdn = "https://cchm-historic-routes.s3-us-west-2.amazonaws.com";
 
 const backgroundImages = "/images/sites/";
 
