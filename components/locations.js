@@ -14,6 +14,10 @@ function getAudioLocation(name) {
 	return `${cdn}/audio/${name}.mp3`;
 }
 
+function getRootAudioLocation(name) {
+	return `${cdn}/root-audio/${name}-main.mp3`;
+}
+
 const heritageImages = [
 	cdn + "/images/heritage/cchm00247.jpg",
 	cdn + "/images/heritage/cchm00782.jpg",
@@ -81,6 +85,7 @@ const locations = [
 	{
 		name: "arts",
 		niceName: "Arts Building",
+		rootAudio: getRootAudioLocation('arts'),
 		lat: 45.629828,
 		lng: -122.671834,
 		descriptions: [
@@ -110,6 +115,7 @@ Hilborn has left a revered legacy. Houser indicates that “His projects span a 
 	{
 		name: "cchm",
 		niceName: "Clark County Historical Museum",
+		rootAudio: getRootAudioLocation('cchm'),
 		lat: 45.633121,
 		lng: -122.671269,
 		descriptions: [
@@ -144,6 +150,7 @@ The museum continues to be operated by the Clark County Historical Society and m
 	{
 		name: "elks",
 		niceName: "Elks Building",
+		rootAudio: getRootAudioLocation('elks'),
 		lat: 45.628606,
 		lng: -122.671964,
 		descriptions: [
@@ -183,6 +190,7 @@ Though no longer in this building, the Vancouver Elks 823 continue to perform ch
 	{
 		name: "esther",
 		niceName: "Esther Short Park",
+		rootAudio: getRootAudioLocation('esther'),
 		lat: 45.626475,
 		lng: -122.674986,
 		descriptions: [
@@ -220,6 +228,7 @@ The Park enjoyed many prosperous years, but in the 1960s began to experience a d
 	{
 		name: "evergreen",
 		niceName: "Evergreen Hotel",
+		rootAudio: getRootAudioLocation('evergreen'),
 		lat: 45.625218,
 		lng: -122.672039,
 		descriptions: [
@@ -252,6 +261,7 @@ By the late 1950s and early 1960s, much of the focus on Vancouver’s economic g
 	{
 		name: "heritage",
 		niceName: "Heritage Building",
+		rootAudio: getRootAudioLocation('heritage'),
 		lat: 45.625856,
 		lng: -122.671356,
 		descriptions: [
@@ -274,6 +284,7 @@ The bank thrived until 1933, when it failed as a result of the Depression. In 19
 	{
 		name: "hidden",
 		niceName: "Hidden House",
+		rootAudio: getRootAudioLocation('hidden'),
 		lat: 45.631389,
 		lng: -122.672193,
 		descriptions: [
@@ -315,6 +326,7 @@ The family continued to manufacture bricks well into the late 20th Century. Howe
 	{
 		name: "kiggins",
 		niceName: "Kiggins Theatre",
+		rootAudio: getRootAudioLocation('kiggins'),
 		lat: 45.629326,
 		lng: -122.671201,
 		descriptions: [
@@ -351,6 +363,7 @@ All venues constructed or owned by Kiggins have been demolished or repurposed, w
 	{
 		name: "providence",
 		niceName: "Providence Academy",
+		rootAudio: getRootAudioLocation('providence'),
 		lat: 45.629479,
 		lng: -122.668181,
 
@@ -384,6 +397,7 @@ In 1969, Robert Hidden, the great-grandson of Hidden Brick Company founder Lowel
 	{
 		name: "schofield",
 		niceName: "Schofield Building",
+		rootAudio: getRootAudioLocation('schofield'),
 		lat: 45.625871,
 		lng: -122.671923,
 		descriptions: [
@@ -409,6 +423,7 @@ After his parents’ passing, Edward R. Schofield took up the Schofield family l
 	{
 		name: "slocum",
 		niceName: "Slocum House",
+		rootAudio: getRootAudioLocation('slocum'),
 		lat: 45.62616,
 		lng: -122.675759,
 		descriptions: [
@@ -440,6 +455,7 @@ The Slocums remained in the house for some time, but eventually the couple moved
 	{
 		name: "smith",
 		niceName: "Smith Tower",
+		rootAudio: getRootAudioLocation('smith'),
 		lat: 45.625458,
 		lng: -122.672444,
 		descriptions: [
